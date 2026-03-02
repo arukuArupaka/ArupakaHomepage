@@ -5,4 +5,6 @@ node_modules
 .next
 out
 build
-dist
+dist/app copy/
+/ARUPAKAHP/
+pnpm-lock.yaml
