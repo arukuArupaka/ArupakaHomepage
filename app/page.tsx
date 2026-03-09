@@ -1,8 +1,8 @@
-import Navigation from "@/components/navigation"
-import HeroSection from "@/components/hero-section"
-import NewsSection from "@/components/news-section"
-import ContactSection from "@/components/contact-section"
-import Footer from "@/components/footer"
+import Navigation from "@/components/navigation";
+import HeroSection from "@/components/hero-section";
+import NewsSection from "@/components/news-section";
+import ContactSection from "@/components/contact-section";
+import Footer from "@/components/footer";
 
 export default function Home() {
   return (
@@ -13,5 +13,5 @@ export default function Home() {
       <ContactSection />
       <Footer />
     </main>
-  )
+  );
 }
