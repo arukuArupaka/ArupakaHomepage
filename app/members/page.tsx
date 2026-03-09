@@ -1,8 +1,88 @@
 export default function MembersPage() {
   return (
-    <main className="pt-24 px-8">
-      <h1 className="text-3xl font-bold mb-4">メンバー紹介</h1>
-      <p>はしるアルパカのメンバーを紹介します。</p>
+    <main className="min-h-screen bg-slate-50 pt-32 pb-20 px-6">
+      <div className="max-w-3xl mx-auto">
+
+        {/* タイトル */}
+        <h1 className="text-4xl font-bold text-slate-900 text-center mb-4">
+          メンバー紹介
+        </h1>
+
+        <p className="text-center text-slate-600 mb-16">
+          はしるアルパカのメンバーを紹介します
+        </p>
+
+        {/* 代表 */}
+        <section className="mb-12 bg-pink-50 border-l-4 border-pink-400 p-6 rounded">
+          <h2 className="text-2xl font-bold mb-4 text-pink-600">
+            代表
+          </h2>
+
+          <p className="mb-2 text-slate-800 text-lg">
+            <span className="font-bold">会長：</span>
+            林 泰聖（理工学部 電子情報工学科）
+          </p>
+
+          <p className="text-slate-800 text-lg">
+            <span className="font-bold">副会長：</span>
+            小林 海空斗（理工学部 電気電子工学科）
+          </p>
+        </section>  
+
+        {/* 学年構成 */}
+        <section className="mb-12 bg-blue-50 border-l-4 border-blue-400 p-6 rounded">
+          <h2 className="text-2xl font-bold mb-4 text-blue-600">
+            学年構成
+          </h2>
+
+          <ul className="space-y-1 text-slate-800">
+            <li>1回生：18名</li>
+            <li>2回生：8名</li>
+            <li>3回生：12名</li>
+            <li>4回生：4名</li>
+          </ul>
+        </section>
+
+        {/* 学部学科構成 */}
+       <section className="bg-purple-50 border-l-4 border-purple-400 p-6 rounded">
+  <h2 className="text-2xl font-bold mb-6 text-purple-600">
+    学部学科構成
+  </h2>
+
+  <div className="grid md:grid-cols-2 gap-8">
+
+    {/* 理工学部 */}
+    <div>
+      <h3 className="font-bold text-lg mb-2 text-slate-700">
+        理工学部
+      </h3>
+
+      <ul className="space-y-1 text-slate-800">
+        <li>電子情報工学科：21名</li>
+        <li>電気電子工学科：7名</li>
+        <li>ロボティクス学科：6名</li>
+        <li>機械工学科：2名</li>
+        <li>物理学科：2名</li>
+        <li>数理学科：1名</li>
+      </ul>
+    </div>
+
+    {/* その他 */}
+    <div>
+      <h3 className="font-bold text-lg mb-2 text-slate-700">
+        その他の学部
+      </h3>
+
+      <ul className="space-y-1 text-slate-800">
+        <li>薬学部 薬学科：2名</li>
+        <li>食マネジメント学部：1名</li>
+        <li>経済学部：1名</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+  </div>
     </main>
   );
 }

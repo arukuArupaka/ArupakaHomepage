@@ -7,12 +7,12 @@ export default function Navigation() {
         <div className="flex items-center justify-between h-20">
           {/* Menu Items */}
           <div className="hidden md:flex items-center gap-8">
-            <a
-              href="#home"
+            <Link
+              href="/"
               className="text-sm font-medium text-slate-900 hover:text-pink-600"
             >
               ホーム
-            </a>
+            </Link>
 
             <a
               href="#about"

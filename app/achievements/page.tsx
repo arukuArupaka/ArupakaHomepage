@@ -25,9 +25,9 @@ const achievements: Achievement[] = [
     highlight: "ダウンロード数 700以上",
     description:
       "サークルで企画・開発したアプリで、累計700ダウンロードを達成しました。ユーザーの声を元にアップデートを重ね、より使いやすいアプリへ改善を行いました。",
-    buttonText: "詳細を見る",
+    buttonText: "ダウンロードへ",
     buttonColor: "bg-pink-500 hover:bg-pink-600",
-    image: "/images/arupaka.png",
+    image: "/images/arukuArupaka.png",
     link: "#",
   },
   {
@@ -37,9 +37,9 @@ const achievements: Achievement[] = [
     highlight: "ダウンロード数 100以上",
     description:
       "学生生活を支援することを目的に制作したアプリで、累計100ダウンロードを突破しました。企画から開発、公開までを一貫して行いました。",
-    buttonText: "詳細を見る",
+    buttonText: "ダウンロードへ",
     buttonColor: "bg-sky-500 hover:bg-sky-600",
-    image: "/images/ritsufure.png",
+    image: "/images/rituhure.png",
     link: "#",
   },
   {
@@ -63,8 +63,8 @@ const achievements: Achievement[] = [
       "地方の中学生を対象に、ゲームを通してプログラミングを学ぶ授業を実施しました。「アルゴロジック」を活用し、段階的に理解できる構成を工夫しました。",
     buttonText: "活動を見る",
     buttonColor: "bg-purple-500 hover:bg-purple-600",
-    image: "/images/education.png",
-    link: "#",
+    image: "/images/OIP.webp",
+    link: "/achievements/education",
   },
 ];
 
@@ -92,9 +92,9 @@ export default function AchievementsPage(): React.ReactElement {
         <section className="mt-16 grid gap-8 md:grid-cols-2">
           {achievements.map((item: Achievement, index: number) => (
             <article
-              key={index}
-              className="rounded-3xl border border-white/50 bg-white/60 p-8 shadow-lg backdrop-blur-md transition hover:scale-[1.02]"
-            >
+            key={index}
+             className="flex flex-col rounded-3xl border border-white/50 bg-white/60 p-8 shadow-lg backdrop-blur-md transition hover:scale-[1.02]"
+>
               <div className="flex items-start justify-between">
                 <span
                   className={`inline-block rounded-full px-4 py-1 text-sm font-semibold text-white ${item.tagColor}`}
@@ -118,14 +118,14 @@ export default function AchievementsPage(): React.ReactElement {
                 {item.highlight}
               </p>
 
-              <p className="mt-4 text-sm leading-relaxed text-gray-600">
-                {item.description}
-              </p>
+              <p className="mt-4 text-sm leading-relaxed text-gray-600 flex-grow">
+             {item.description}
+               </p>
 
               <div className="mt-6 flex justify-end">
                 <Link
                   href={item.link}
-                  target={item.link.startsWith("http") ? "_blank" : "_self"}
+                  
                   className={`flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white shadow-md transition ${item.buttonColor}`}
                 >
                   {item.buttonText}
@@ -168,25 +168,8 @@ export default function AchievementsPage(): React.ReactElement {
         </section>
 
         {/* CTA */}
-        <section className="mt-20 text-center">
-          <h2 className="text-3xl font-bold">一緒に開発しよう</h2>
-
-          <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-            <Link
-              href="/join"
-              className="rounded-full bg-blue-500 px-10 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-blue-600"
-            >
-              JOIN US
-            </Link>
-
-            <Link
-              href="/contact"
-              className="rounded-full bg-pink-500 px-10 py-4 text-lg font-semibold text-white shadow-lg transition hover:bg-pink-600"
-            >
-              CONTACT
-            </Link>
-          </div>
-        </section>
+       
+        
       </div>
     </main>
   );
