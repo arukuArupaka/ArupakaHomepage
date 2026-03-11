@@ -1,17 +1,25 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Navigation() {
   return (
     <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-slate-200/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+      <div className="w-full px-2 sm:px-4 lg:px-6">
+        <div className="flex h-20 items-center">
           {/* Menu Items */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-8 pl-4 lg:pl-6">
             <Link
               href="/"
-              className="text-sm font-medium text-slate-900 hover:text-pink-600"
+              className="flex items-center gap-2 text-sm font-medium text-slate-900 hover:text-pink-600"
             >
-              ホーム
+              <Image
+                src="/images/arupaka_icon.png"
+                alt="Arupaka icon"
+                width={40}
+                height={40}
+                className="-ml-1 h-10 w-10 rounded-full border border-slate-300"
+              />
+              <span>ホーム</span>
             </Link>
 
             <a

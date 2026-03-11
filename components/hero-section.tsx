@@ -1,70 +1,114 @@
 "use client";
 
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import { useFadeUp } from "@/hooks/use-fade-up";
 
-export default function HeroSection() {
-  const { ref: contentRef, isVisible: contentVisible } = useFadeUp();
-  const { ref: imageRef, isVisible: imageVisible } = useFadeUp();
+type ItemDef = {
+  id: string;
+  src: string;
+  alt: string;
+  left: string;
+  top: string;
+  exitX: number;
+  exitY: number;
+  rotate: number;
+  size: number;
+};
+
+const ITEMS: ItemDef[] = [
+  { id: "c", src: "/images/c.svg", alt: "C", left: "8%", top: "16%", exitX: -260, exitY: -220, rotate: -10, size: 94 },
+  { id: "figma", src: "/images/figma.svg", alt: "Figma", left: "94%", top: "16%", exitX: 280, exitY: -220, rotate: 11, size: 92 },
+  { id: "python", src: "/images/python.svg", alt: "Python", left: "8%", top: "66%", exitX: -300, exitY: 190, rotate: -8, size: 116 },
+  { id: "next", src: "/images/next.svg", alt: "Next.js", left: "93%", top: "68%", exitX: 300, exitY: 220, rotate: 8, size: 98 },
+  { id: "typescript", src: "/images/typescript.svg", alt: "TypeScript", left: "12%", top: "40%", exitX: -220, exitY: -60, rotate: 7, size: 108 },
+  { id: "javascript", src: "/images/javascript.svg", alt: "JavaScript", left: "88%", top: "40%", exitX: 200, exitY: -90, rotate: -9, size: 108 },
+  { id: "git", src: "/images/git.svg", alt: "Git", left: "47%", top: "87%", exitX: 0, exitY: 260, rotate: 0, size: 120 },
+];
+
+function FloatingItem({
+  item,
+  scrollYProgress,
+}: {
+  item: ItemDef;
+  scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
+}) {
+  const x = useTransform(scrollYProgress, [0, 0.5], [0, item.exitX]);
+  const y = useTransform(scrollYProgress, [0, 0.5], [0, item.exitY]);
+  const opacity = useTransform(scrollYProgress, [0, 0.32, 0.5], [1, 1, 0]);
+  const rotate = useTransform(scrollYProgress, [0, 0.5], [item.rotate, item.rotate + (item.exitX >= 0 ? 16 : -16)]);
 
   return (
-    <section id="home" className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <div
-            ref={contentRef}
-            className={`space-y-8 transition-all duration-1000 transform ${contentVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-10"
-              }`}
-          >
-            {/* Decorative elements */}
-            <div className="absolute top-40 -left-20 w-32 h-32 bg-gradient-to-br from-pink-200 to-purple-200 rounded-full blur-3xl opacity-40"></div>
-            <div className="absolute top-64 left-10 w-20 h-20 bg-blue-300 rounded-full blur-2xl opacity-20"></div>
+    <div
+      className="pointer-events-none absolute z-0"
+      style={{ left: item.left, top: item.top, transform: "translate(-50%, -50%)" }}
+    >
+      <motion.div style={{ x, y, opacity, rotate }}>
+        <Image
+          src={item.src}
+          alt={item.alt}
+          width={item.size}
+          height={item.size}
+          priority
+          className="drop-shadow-[0_10px_30px_rgba(0,0,0,0.15)]"
+        />
+      </motion.div>
+    </div>
+  );
+}
 
-            {/* Main heading */}
-            <div className="relative space-y-4">
-              <h1 className="text-5xl lg:text-6xl font-bold text-slate-900 leading-tight">
-                <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
-                  アルパカ
-                </span>
-                <br />
-                <span className="text-slate-900">一緒に</span>
-              </h1>
-              <p className="text-lg text-slate-600 leading-relaxed max-w-lg">
-                アプリ開発を通じて、新しい技術を学び、仲間と共に成長する。
-                <br />
-                はしるアルパカは、情熱を持った開発者たちの集まりです。
-              </p>
-            </div>
+export default function HeroSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
 
-            {/* CTA Button */}
-            <div>
-              <button
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-4 rounded-full bg-gradient-to-r from-pink-500 to-pink-600 text-white font-semibold hover:shadow-2xl transition-all transform hover:scale-105"
-              >
-                🚀 はじめる
-              </button>
-            </div>
+  const logoY = useTransform(scrollYProgress, [0, 1], [0, -140]);
+  const logoScale = useTransform(scrollYProgress, [0, 0.5], [1, 1.06]);
 
-            {/* Description text */}
-            <div className="space-y-2 text-sm text-slate-600 pt-4">
-              <p>未経験から経験者まで、すべての開発者を歓迎します。</p>
-              <p>一緒に最高のアプリを作りましょう。</p>
+  return (
+    <div
+      ref={sectionRef}
+      style={{
+        background:
+          "radial-gradient(ellipse at 50% 30%, #ffffff 0%, #f7f7f7 40%, #f0f0f0 70%, #ebebeb 100%)",
+      }}
+    >
+      <section className="relative flex h-screen flex-col items-center justify-center overflow-hidden px-6">
+        <div className="pointer-events-none absolute inset-0">
+          {ITEMS.map((item) => (
+            <FloatingItem key={item.id} item={item} scrollYProgress={scrollYProgress} />
+          ))}
+        </div>
+
+        <div className="relative z-10 -mt-[5vh] flex flex-col items-center text-center">
+          <h1 className="text-[clamp(3rem,9vw,8rem)] font-black leading-[0.9] tracking-tighter text-gray-900">はしるアルパカ</h1>
+          <p className="mt-8 max-w-lg text-base leading-relaxed text-gray-500 md:text-lg">
+            つくりたいを、カタチに。
+            <br />
+            ここは、学生がアプリをつくる場所。
+          </p>
+        </div>
+      </section>
+
+      <section className="relative px-6 pb-28">
+        <motion.div style={{ y: logoY, scale: logoScale }} className="relative z-10 mx-auto -mt-72 w-full max-w-5xl">
+          <div className="rounded-2xl border border-gray-200 bg-white/90 p-8 shadow-2xl backdrop-blur-sm">
+            <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 md:grid-cols-7">
+              {ITEMS.map((item) => (
+                <div
+                  key={`grid-${item.id}`}
+                  className="flex flex-col items-center justify-center gap-2 rounded-xl border border-gray-100 bg-white p-3"
+                >
+                  <Image src={item.src} alt={item.alt} width={44} height={44} />
+                  <span className="text-xs font-medium text-gray-600">{item.alt}</span>
+                </div>
+              ))}
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Scroll indicator */}
-      <div className="flex flex-col items-center gap-3 mt-16">
-        <p className="text-sm text-slate-500">SCROLL</p>
-        <div className="w-6 h-10 rounded-full border-2 border-slate-400 flex items-start justify-center p-2">
-          <div className="w-1 h-2 bg-gradient-to-b from-pink-500 to-transparent rounded-full animate-bounce"></div>
-        </div>
-      </div>
-    </section>
+        </motion.div>
+      </section>
+    </div>
   );
 }
