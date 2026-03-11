@@ -34,21 +34,23 @@ type Particle = {
 const ITEMS: ItemDef[] = [
   { id: "c", src: "/images/c.svg", alt: "C", left: "8%", top: "16%", mobileLeft: "9%", mobileTop: "21%", exitX: -260, exitY: -220, rotate: -10, size: 94, mobileSize: 76 },
   { id: "figma", src: "/images/figma.svg", alt: "Figma", right: "6%", top: "16%", mobileRight: "8%", mobileTop: "21%", exitX: 280, exitY: -220, rotate: 11, size: 92, mobileSize: 70 },
+  { id: "react", src: "/images/react.svg", alt: "React", left: "62%", top: "18%", mobileLeft: "24%", mobileTop: "25%", exitX: 240, exitY: -200, rotate: 6, size: 92, mobileSize: 68 },
   { id: "python", src: "/images/python.svg", alt: "Python", left: "8%", top: "66%", mobileLeft: "8%", mobileTop: "72%", exitX: -300, exitY: 190, rotate: -8, size: 116, mobileSize: 88 },
   { id: "next", src: "/images/next.svg", alt: "Next.js", right: "7%", top: "68%", mobileRight: "8%", mobileTop: "73%", exitX: 300, exitY: 220, rotate: 8, size: 98, mobileSize: 78 },
   { id: "typescript", src: "/images/typescript.svg", alt: "TypeScript", left: "12%", top: "40%", mobileLeft: "7%", mobileTop: "45%", exitX: -220, exitY: -60, rotate: 7, size: 108, mobileSize: 84 },
   { id: "javascript", src: "/images/javascript.svg", alt: "JavaScript", right: "10%", top: "40%", mobileRight: "8%", mobileTop: "45%", exitX: 200, exitY: -90, rotate: -9, size: 108, mobileSize: 84 },
-  { id: "git", src: "/images/git.svg", alt: "Git", left: "47%", top: "87%", mobileLeft: "50%", mobileTop: "90%", exitX: 0, exitY: 260, rotate: 0, size: 120, mobileSize: 92 },
+  { id: "git", src: "/images/git.svg", alt: "Git", left: "40%", top: "87%", mobileLeft: "50%", mobileTop: "90%", exitX: -200, exitY: 320, rotate: -6, size: 120, mobileSize: 92 },
 ];
 
 const TAB_ORDER: Record<string, number> = {
   c: 0,
   python: 1,
-  next: 2,
-  typescript: 3,
-  javascript: 4,
-  figma: 5,
-  git: 6,
+  react: 2,
+  next: 3,
+  typescript: 4,
+  javascript: 5,
+  figma: 6,
+  git: 7,
 };
 
 const TAB_ITEMS = [...ITEMS].sort(
@@ -350,11 +352,11 @@ export default function HeroSection() {
       <section className="relative px-6 pb-28">
         <motion.div style={{ y: logoY, scale: logoScale }} className="relative z-10 mx-auto -mt-72 w-full max-w-5xl">
           <div className="rounded-2xl border border-gray-200 bg-white/90 p-8 shadow-2xl backdrop-blur-sm">
-            <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 md:grid-cols-7">
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-8 lg:gap-5">
               {TAB_ITEMS.map((item) => (
                 <div
                   key={`grid-${item.id}`}
-                  className="flex flex-col items-center justify-center gap-2 rounded-xl border border-gray-100 bg-white p-3"
+                  className="flex min-w-0 flex-col items-center justify-center gap-2 rounded-xl border border-gray-100 bg-white p-3"
                 >
                   <Image src={item.src} alt={item.alt} width={44} height={44} />
                   <span className="text-xs font-medium text-gray-600">{item.alt}</span>
