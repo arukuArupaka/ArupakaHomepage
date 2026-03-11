@@ -41,8 +41,22 @@ const ITEMS: ItemDef[] = [
   { id: "git", src: "/images/git.svg", alt: "Git", left: "47%", top: "87%", mobileLeft: "50%", mobileTop: "90%", exitX: 0, exitY: 260, rotate: 0, size: 120, mobileSize: 92 },
 ];
 
+const TAB_ORDER: Record<string, number> = {
+  c: 0,
+  python: 1,
+  next: 2,
+  typescript: 3,
+  javascript: 4,
+  figma: 5,
+  git: 6,
+};
+
+const TAB_ITEMS = [...ITEMS].sort(
+  (a, b) => (TAB_ORDER[a.id] ?? Number.MAX_SAFE_INTEGER) - (TAB_ORDER[b.id] ?? Number.MAX_SAFE_INTEGER),
+);
+
 const TYPE_WORDS = ["はしるアルパカ", "Learn Together.", "Build Apps."];
-const TYPE_COLORS = ["#111827", "#ef9e4e", "#f97316"];
+const TYPE_COLORS = ["#333333", "rebeccapurple", "lightblue"];
 
 function FloatingItem({
   item,
@@ -337,7 +351,7 @@ export default function HeroSection() {
         <motion.div style={{ y: logoY, scale: logoScale }} className="relative z-10 mx-auto -mt-72 w-full max-w-5xl">
           <div className="rounded-2xl border border-gray-200 bg-white/90 p-8 shadow-2xl backdrop-blur-sm">
             <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 md:grid-cols-7">
-              {ITEMS.map((item) => (
+              {TAB_ITEMS.map((item) => (
                 <div
                   key={`grid-${item.id}`}
                   className="flex flex-col items-center justify-center gap-2 rounded-xl border border-gray-100 bg-white p-3"
