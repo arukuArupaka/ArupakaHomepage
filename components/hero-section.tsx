@@ -58,7 +58,7 @@ const TAB_ITEMS = [...ITEMS].sort(
 );
 
 const TYPE_WORDS = ["はしるアルパカ", "Learn Together.", "Build Apps."];
-const TYPE_COLORS = ["#333333", "rebeccapurple", "lightblue"];
+const TYPE_COLORS = ["#444444", "rebeccapurple", "lightblue"];
 
 function FloatingItem({
   item,
