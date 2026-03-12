@@ -30,7 +30,7 @@ export default function RootLayout({
         <Navigation />
 
         {/* ページ本体（固定ヘッダー対策） */}
-        <main className="pt-24">{children}</main>
+        <main className="pt-20">{children}</main>
 
         {/* フッター */}
         <Footer />

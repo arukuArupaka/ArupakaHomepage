@@ -16,7 +16,7 @@ export default function Navigation() {
           <div className="flex h-20 items-center justify-between">
             <Link
               href="/"
-              className="flex items-center gap-2 whitespace-nowrap pl-1 text-xs font-medium text-slate-900 hover:text-pink-600 sm:text-sm"
+              className="flex items-center gap-2 whitespace-nowrap pl-1 text-xs font-medium text-slate-900 hover:text-indigo-500 sm:text-sm"
               onClick={closeMenu}
               aria-label="ホーム"
             >
@@ -32,42 +32,42 @@ export default function Navigation() {
             <div className="hidden min-w-max items-center gap-5 pl-2 md:flex md:gap-8 lg:pl-6">
               <Link
                 href="/"
-                className="whitespace-nowrap text-xs font-medium text-slate-900 hover:text-pink-600 sm:text-sm"
+                className="whitespace-nowrap text-xs font-medium text-slate-900 hover:text-indigo-500 sm:text-sm"
               >
                 Home
               </Link>
 
               <a
                 href="/aboutus"
-                className="whitespace-nowrap text-xs font-medium text-slate-900 hover:text-pink-600 sm:text-sm"
+                className="whitespace-nowrap text-xs font-medium text-slate-900 hover:text-indigo-500 sm:text-sm"
               >
                 About us
               </a>
 
               <Link
                 href="/achievements"
-                className="whitespace-nowrap text-xs font-medium text-slate-900 hover:text-pink-600 sm:text-sm"
+                className="whitespace-nowrap text-xs font-medium text-slate-900 hover:text-indigo-500 sm:text-sm"
               >
                 Achievements
               </Link>
 
               <Link
                 href="/members"
-                className="whitespace-nowrap text-xs font-medium text-slate-900 hover:text-pink-600 sm:text-sm"
+                className="whitespace-nowrap text-xs font-medium text-slate-900 hover:text-indigo-500 sm:text-sm"
               >
                 Members
               </Link>
 
               <Link
                 href="/join"
-                className="whitespace-nowrap text-xs font-medium text-slate-900 hover:text-pink-600 sm:text-sm"
+                className="whitespace-nowrap text-xs font-medium text-slate-900 hover:text-indigo-500 sm:text-sm"
               >
                 Join Us
               </Link>
 
               <Link
                 href="/corporate"
-                className="whitespace-nowrap text-xs font-medium text-slate-900 hover:text-pink-600 sm:text-sm"
+                className="whitespace-nowrap text-xs font-medium text-slate-900 hover:text-indigo-500 sm:text-sm"
               >
                 For Companies
               </Link>
@@ -113,22 +113,22 @@ export default function Navigation() {
             </div>
 
             <nav className="flex flex-col gap-4">
-              <Link href="/" onClick={closeMenu} className="text-sm font-medium text-slate-900">
+              <Link href="/" onClick={closeMenu} className="text-sm font-medium text-slate-900 hover:text-indigo-500">
                 Home
               </Link>
-              <a href="/aboutus" onClick={closeMenu} className="text-sm font-medium text-slate-900">
+              <a href="/aboutus" onClick={closeMenu} className="text-sm font-medium text-slate-900 hover:text-indigo-500">
                 About us
               </a>
-              <Link href="/achievements" onClick={closeMenu} className="text-sm font-medium text-slate-900">
+              <Link href="/achievements" onClick={closeMenu} className="text-sm font-medium text-slate-900 hover:text-indigo-500">
                 Achievements
               </Link>
-              <Link href="/members" onClick={closeMenu} className="text-sm font-medium text-slate-900">
+              <Link href="/members" onClick={closeMenu} className="text-sm font-medium text-slate-900 hover:text-indigo-500">
                 Members
               </Link>
-              <Link href="/join" onClick={closeMenu} className="text-sm font-medium text-slate-900">
+              <Link href="/join" onClick={closeMenu} className="text-sm font-medium text-slate-900 hover:text-indigo-500">
                 Join Us
               </Link>
-              <Link href="/corporate" onClick={closeMenu} className="text-sm font-medium text-slate-900">
+              <Link href="/corporate" onClick={closeMenu} className="text-sm font-medium text-slate-900 hover:text-indigo-500">
                 For Companies
               </Link>
             </nav>

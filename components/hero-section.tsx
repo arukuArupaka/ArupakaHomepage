@@ -21,24 +21,14 @@ type ItemDef = {
   mobileSize?: number;
 };
 
-type Particle = {
-  x: number;
-  y: number;
-  xv: number;
-  yv: number;
-  c: string;
-  s: number;
-  a: number;
-};
-
 const ITEMS: ItemDef[] = [
-  { id: "c", src: "/images/c.svg", alt: "C", left: "8%", top: "16%", mobileLeft: "9%", mobileTop: "21%", exitX: -260, exitY: -220, rotate: -10, size: 94, mobileSize: 76 },
-  { id: "figma", src: "/images/figma.svg", alt: "Figma", right: "6%", top: "16%", mobileRight: "8%", mobileTop: "21%", exitX: 280, exitY: -220, rotate: 11, size: 92, mobileSize: 70 },
-  { id: "react", src: "/images/react.svg", alt: "React", left: "62%", top: "18%", mobileLeft: "62%", mobileTop: "25%", exitX: 240, exitY: -200, rotate: 6, size: 92, mobileSize: 68 },
+  { id: "c", src: "/images/c.svg", alt: "C", left: "8%", top: "16%", mobileLeft: "16%", mobileTop: "10%", exitX: -260, exitY: -220, rotate: -10, size: 94, mobileSize: 76 },
+  { id: "figma", src: "/images/figma.svg", alt: "Figma", right: "6%", top: "16%", mobileRight: "12%", mobileTop: "13%", exitX: 280, exitY: -220, rotate: 11, size: 92, mobileSize: 70 },
+  { id: "react", src: "/images/react.svg", alt: "React", left: "62%", top: "18%", mobileLeft: "49%", mobileTop: "25%", exitX: 240, exitY: -200, rotate: 6, size: 92, mobileSize: 68 },
   { id: "python", src: "/images/python.svg", alt: "Python", left: "8%", top: "66%", mobileLeft: "8%", mobileTop: "72%", exitX: -300, exitY: 190, rotate: -8, size: 116, mobileSize: 88 },
   { id: "next", src: "/images/next.svg", alt: "Next.js", right: "7%", top: "68%", mobileRight: "8%", mobileTop: "73%", exitX: 300, exitY: 220, rotate: 8, size: 98, mobileSize: 78 },
-  { id: "typescript", src: "/images/typescript.svg", alt: "TypeScript", left: "12%", top: "40%", mobileLeft: "7%", mobileTop: "45%", exitX: -220, exitY: -60, rotate: 7, size: 108, mobileSize: 84 },
-  { id: "javascript", src: "/images/javascript.svg", alt: "JavaScript", right: "10%", top: "40%", mobileRight: "8%", mobileTop: "45%", exitX: 200, exitY: -90, rotate: -9, size: 108, mobileSize: 84 },
+  { id: "typescript", src: "/images/typescript.svg", alt: "TypeScript", left: "12%", top: "40%", mobileLeft: "13%", mobileTop: "48%", exitX: -220, exitY: -60, rotate: 7, size: 108, mobileSize: 84 },
+  { id: "javascript", src: "/images/javascript.svg", alt: "JavaScript", right: "10%", top: "40%", mobileRight: "13%", mobileTop: "43%", exitX: 200, exitY: -90, rotate: -9, size: 108, mobileSize: 84 },
   { id: "git", src: "/images/git.svg", alt: "Git", left: "40%", top: "87%", mobileLeft: "50%", mobileTop: "90%", exitX: -200, exitY: 320, rotate: -6, size: 120, mobileSize: 92 },
 ];
 
@@ -58,7 +48,7 @@ const TAB_ITEMS = [...ITEMS].sort(
 );
 
 const TYPE_WORDS = ["はしるアルパカ", "Learn Together.", "Build Apps."];
-const TYPE_COLORS = ["#444444", "rebeccapurple", "lightblue"];
+const TYPE_COLORS = ["#ffffff", "#F3A1FF", "lightblue"];
 
 function FloatingItem({
   item,
@@ -98,7 +88,6 @@ function FloatingItem({
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [typedText, setTypedText] = useState("");
   const [typedColorIndex, setTypedColorIndex] = useState(0);
@@ -173,136 +162,23 @@ export default function HeroSection() {
     };
   }, []);
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const section = sectionRef.current;
-    if (!canvas || !section) return;
-
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const mouse = { x: 0, y: 0, out: true };
-    const particles: Particle[] = [];
-    const gravityStrength = 10;
-    const spawnInterval = 10;
-    let spawnTimer = 0;
-    let type = 0;
-    let frameId = 0;
-    let time = performance.now();
-
-    const resize = () => {
-      const rect = canvas.getBoundingClientRect();
-      const dpr = window.devicePixelRatio || 1;
-      canvas.width = Math.max(1, Math.floor(rect.width * dpr));
-      canvas.height = Math.max(1, Math.floor(rect.height * dpr));
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      if (mouse.out) {
-        mouse.x = rect.width / 2;
-        mouse.y = rect.height / 2;
-      }
-    };
-
-    const onMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
-      mouse.out = false;
-    };
-
-    const onMouseLeave = () => {
-      mouse.out = true;
-    };
-
-    const newParticle = () => {
-      type = type ? 0 : 1;
-      particles.push({
-        x: mouse.x,
-        y: mouse.y,
-        xv: type ? 18 * Math.random() - 9 : 24 * Math.random() - 12,
-        yv: type ? 18 * Math.random() - 9 : 24 * Math.random() - 12,
-        c: type ? "rgba(110,223,243,0.45)" : "rgba(140,205,255,0.38)",
-        s: type ? 4 + 8 * Math.random() : 3 + 6 * Math.random(),
-        a: 1,
-      });
-    };
-
-    const draw = () => {
-      const width = canvas.clientWidth;
-      const height = canvas.clientHeight;
-      ctx.clearRect(0, 0, width, height);
-      for (let i = 0; i < particles.length; i += 1) {
-        const p = particles[i];
-        ctx.globalAlpha = p.a;
-        ctx.fillStyle = p.c;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.s, 0, 2 * Math.PI);
-        ctx.fill();
-      }
-      ctx.globalAlpha = 1;
-    };
-
-    const calculate = (newTime: number) => {
-      const dt = newTime - time;
-      time = newTime;
-
-      if (!mouse.out) {
-        spawnTimer += dt < 100 ? dt : 100;
-        for (; spawnTimer > 0; spawnTimer -= spawnInterval) {
-          newParticle();
-        }
-      }
-
-      const particleOverflow = particles.length - 700;
-      if (particleOverflow > 0) {
-        particles.splice(0, particleOverflow);
-      }
-
-      for (let i = 0; i < particles.length; i += 1) {
-        const p = particles[i];
-        if (!mouse.out) {
-          const x = mouse.x - p.x;
-          const y = mouse.y - p.y;
-          const distance = x * x + y * y;
-          const attract = distance > 100 ? gravityStrength / distance : gravityStrength / 100;
-          p.xv = (p.xv + attract * x) * 0.99;
-          p.yv = (p.yv + attract * y) * 0.99;
-        }
-        p.x += p.xv;
-        p.y += p.yv;
-        p.a *= 0.99;
-      }
-    };
-
-    const loop = (newTime: number) => {
-      draw();
-      calculate(newTime);
-      frameId = window.requestAnimationFrame(loop);
-    };
-
-    resize();
-    section.addEventListener("mousemove", onMouseMove);
-    section.addEventListener("mouseleave", onMouseLeave);
-    window.addEventListener("resize", resize);
-    frameId = window.requestAnimationFrame(loop);
-
-    return () => {
-      window.cancelAnimationFrame(frameId);
-      section.removeEventListener("mousemove", onMouseMove);
-      section.removeEventListener("mouseleave", onMouseLeave);
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
-
   return (
-    <div
-      ref={sectionRef}
-      style={{
-        background:
-          "radial-gradient(ellipse at 50% 30%, #ffffff 0%, #f7f7f7 40%, #f0f0f0 70%, #ebebeb 100%)",
-      }}
-    >
+    <div ref={sectionRef}>
       <section className="relative flex h-screen flex-col items-center justify-center overflow-hidden px-6">
-        <canvas ref={canvasRef} className="absolute inset-0 z-0 h-full w-full" />
+        <div className="area absolute inset-0 z-0">
+          <ul className="circles">
+            <li />
+            <li />
+            <li />
+            <li />
+            <li />
+            <li />
+            <li />
+            <li />
+            <li />
+            <li />
+          </ul>
+        </div>
         <div className="pointer-events-none absolute inset-0 z-[1]">
           {ITEMS.map((item) => {
             const responsiveItem: ItemDef = isMobile
@@ -322,28 +198,28 @@ export default function HeroSection() {
         <div className="relative z-10 -mt-[5vh] flex flex-col items-center text-center">
           <h1 className="translate-x-[0.18em] font-black leading-[0.9] tracking-tight">
             <span
-              className="font-mono text-[clamp(2.1rem,6.6vw,6.1rem)]"
+              className="font-mono text-[clamp(2.25rem,6.95vw,6.45rem)]"
               style={{
                 color: TYPE_COLORS[typedColorIndex],
                 textShadow:
                   typedColorIndex === 0
-                    ? "0 2px 10px rgba(17,24,39,0.2)"
+                    ? "0 0 10px rgba(255,255,255,0.5), 0 0 20px rgba(255,255,255,0.34)"
                     : typedColorIndex === 1
-                      ? "0 2px 10px rgba(102,51,153,0.34)"
-                      : "0 2px 10px rgba(173,216,230,0.45)",
+                      ? "0 2px 10px rgba(243,161,255,0.55), 0 0 20px rgba(184,94,212,0.35)"
+                      : "0 2px 10px rgba(173,216,230,0.6), 0 0 22px rgba(120,210,255,0.38)",
               }}
             >
               {typedText}
             </span>
             <span
-              className={`ml-1 inline-block font-mono text-[clamp(2.1rem,6.6vw,6.1rem)] text-slate-900 ${
+              className={`ml-1 inline-block font-mono text-[clamp(2.25rem,6.95vw,6.45rem)] text-white ${
                 showUnderscore ? "opacity-100" : "opacity-0"
               }`}
             >
               _
             </span>
           </h1>
-          <p className="mt-8 max-w-md text-base leading-relaxed text-gray-500 md:text-lg">
+          <p className="mt-8 max-w-md text-base leading-relaxed text-white md:text-lg">
             つくりたいを、カタチに。
             <br />
             ここは、学生がアプリをつくる場所。
@@ -353,12 +229,12 @@ export default function HeroSection() {
 
       <section className="relative px-6 pb-28">
         <motion.div style={{ y: logoY, scale: logoScale }} className="relative z-10 mx-auto -mt-72 w-full max-w-5xl">
-          <div className="rounded-2xl border border-gray-200 bg-white/90 p-8 shadow-2xl backdrop-blur-sm">
+          <div className="rounded-2xl border border-indigo-200/60 bg-indigo-50/85 p-8 shadow-[0_20px_50px_rgba(37,99,235,0.22)] backdrop-blur-sm">
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-8 lg:gap-5">
               {TAB_ITEMS.map((item) => (
                 <div
                   key={`grid-${item.id}`}
-                  className="group flex min-w-0 flex-col items-center justify-center gap-2 rounded-xl border border-gray-100 bg-white p-3 transition-shadow duration-200 hover:shadow-md"
+                  className="group flex min-w-0 flex-col items-center justify-center gap-2 rounded-xl border border-indigo-200/70 bg-white/85 p-3 transition-all duration-200 hover:border-indigo-400 hover:bg-indigo-100"
                 >
                   <Image
                     src={item.src}
@@ -367,13 +243,126 @@ export default function HeroSection() {
                     height={44}
                     className="transition-transform duration-200 group-hover:scale-125"
                   />
-                  <span className="text-xs font-medium text-gray-600">{item.alt}</span>
+                  <span className="text-xs font-medium text-slate-700 transition-colors duration-200 group-hover:text-indigo-900">
+                    {item.alt}
+                  </span>
                 </div>
               ))}
             </div>
           </div>
         </motion.div>
       </section>
+      <style jsx>{`
+        .area {
+          background: linear-gradient(to left, #8f94fb, #4e54c8);
+        }
+
+        .circles {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+
+        .circles li {
+          position: absolute;
+          display: block;
+          list-style: none;
+          width: 20px;
+          height: 20px;
+          background: rgba(255, 255, 255, 0.2);
+          animation: float-square 25s linear infinite;
+          bottom: -150px;
+        }
+
+        .circles li:nth-child(1) {
+          left: 25%;
+          width: 80px;
+          height: 80px;
+          animation-delay: 0s;
+        }
+
+        .circles li:nth-child(2) {
+          left: 10%;
+          width: 20px;
+          height: 20px;
+          animation-delay: 2s;
+          animation-duration: 12s;
+        }
+
+        .circles li:nth-child(3) {
+          left: 70%;
+          width: 20px;
+          height: 20px;
+          animation-delay: 4s;
+        }
+
+        .circles li:nth-child(4) {
+          left: 40%;
+          width: 60px;
+          height: 60px;
+          animation-delay: 0s;
+          animation-duration: 18s;
+        }
+
+        .circles li:nth-child(5) {
+          left: 65%;
+          width: 20px;
+          height: 20px;
+          animation-delay: 0s;
+        }
+
+        .circles li:nth-child(6) {
+          left: 75%;
+          width: 110px;
+          height: 110px;
+          animation-delay: 3s;
+        }
+
+        .circles li:nth-child(7) {
+          left: 35%;
+          width: 150px;
+          height: 150px;
+          animation-delay: 7s;
+        }
+
+        .circles li:nth-child(8) {
+          left: 50%;
+          width: 25px;
+          height: 25px;
+          animation-delay: 15s;
+          animation-duration: 45s;
+        }
+
+        .circles li:nth-child(9) {
+          left: 20%;
+          width: 15px;
+          height: 15px;
+          animation-delay: 2s;
+          animation-duration: 35s;
+        }
+
+        .circles li:nth-child(10) {
+          left: 85%;
+          width: 150px;
+          height: 150px;
+          animation-delay: 0s;
+          animation-duration: 11s;
+        }
+
+        @keyframes float-square {
+          0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 1;
+            border-radius: 0;
+          }
+
+          100% {
+            transform: translateY(-1000px) rotate(720deg);
+            opacity: 0;
+            border-radius: 50%;
+          }
+        }
+      `}</style>
     </div>
   );
 }
