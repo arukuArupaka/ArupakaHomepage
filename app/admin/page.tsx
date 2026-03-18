@@ -95,14 +95,9 @@ export default async function AdminPage() {
               <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
                 管理者ページ
               </h1>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600 md:text-lg">
-                認証済みの管理者向けに、お問い合わせ一覧と運用導線をまとめています。
-              </p>
             </div>
 
-            <div className="flex flex-col items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4 text-sm text-emerald-900 shadow-sm md:items-end">
-              <p className="font-semibold">認証済み</p>
-              <p className="leading-6">このブラウザでは管理セッションが有効です。</p>
+            <div>
               <AdminLogoutButton />
             </div>
           </div>
@@ -157,7 +152,7 @@ export default async function AdminPage() {
               )}
             </div>
 
-            <div className="space-y-6">
+            <div>
               <div className="grid gap-5">
                 {quickLinks.map((item) => (
                   <Link
@@ -179,26 +174,6 @@ export default async function AdminPage() {
                     </p>
                   </Link>
                 ))}
-              </div>
-
-              <div className="rounded-3xl border border-slate-200 bg-slate-950 p-7 text-slate-50 shadow-[0_18px_60px_rgba(15,23,42,0.22)]">
-                <p className="text-sm font-medium uppercase tracking-[0.2em] text-sky-300">
-                  Notice
-                </p>
-                <h2 className="mt-4 text-2xl font-semibold">
-                  管理上の注意
-                </h2>
-
-                <div className="mt-6 space-y-4">
-                  {notices.map((notice) => (
-                    <div
-                      key={notice}
-                      className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4 text-sm leading-6 text-slate-200"
-                    >
-                      {notice}
-                    </div>
-                  ))}
-                </div>
               </div>
             </div>
           </div>

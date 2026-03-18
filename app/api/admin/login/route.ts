@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server"
+import { headers } from "next/headers"
 import { z } from "zod"
 
 import {
@@ -24,8 +25,28 @@ export async function POST(request: Request) {
   try {
     const body = await request.json()
     const credentials = loginSchema.parse(body)
+    const requestHeaders = await headers()
 
-    if (!validateAdminCredentials(credentials.username, credentials.password)) {
+    const normalizedUsername = credentials.username.trim()
+    const normalizedPassword = credentials.password.trim()
+    const maskedUsername =
+      normalizedUsername.length <= 2
+        ? "*".repeat(normalizedUsername.length)
+        : `${normalizedUsername.slice(0, 2)}${"*".repeat(normalizedUsername.length - 2)}`
+
+    if (!validateAdminCredentials(normalizedUsername, normalizedPassword)) {
+      console.warn("[ADMIN_LOGIN_401]", {
+        timestamp: new Date().toISOString(),
+        maskedUsername,
+        usernameLength: normalizedUsername.length,
+        passwordLength: normalizedPassword.length,
+        ip: requestHeaders.get("x-forwarded-for") ?? "unknown",
+        userAgent: requestHeaders.get("user-agent") ?? "unknown",
+        hasAdminUsername: Boolean(process.env.ADMIN_USERNAME),
+        hasAdminPassword: Boolean(process.env.ADMIN_PASSWORD),
+        hasAdminSessionSecret: Boolean(process.env.ADMIN_SESSION_SECRET),
+      })
+
       return NextResponse.json(
         { message: "ユーザーネームまたはパスワードが正しくありません。" },
         { status: 401 }
