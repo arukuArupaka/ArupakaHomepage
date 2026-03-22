@@ -34,7 +34,7 @@ export default function Navigation() {
               
               <span
   className="text-lg"
-  style={{ fontFamily: "NicoMoji" , fontSize:"25px" ,fontSizeAdjust: "100%"}}
+  style={{ fontFamily: "NicoMoji" , fontSize:"27px" ,fontSizeAdjust: "100%"}}
 >
   はしるアルパカ
 </span>
