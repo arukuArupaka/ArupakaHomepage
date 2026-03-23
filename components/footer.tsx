@@ -87,6 +87,13 @@ export default function Footer() {
                 <Shield className="w-3.5 h-3.5 text-slate-300 group-hover:text-slate-400 transition-colors" />
                 <span className="font-bold text-sm text-slate-700">プライバシー</span>
               </button>
+
+              <Link
+                href="/admin"
+                className="group flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/70 hover:bg-white hover:-translate-y-1 shadow-[0_2px_10px_rgba(0,0,0,0.02)] border border-white/80 transition-all duration-300 backdrop-blur-sm"
+              >
+                <span className="font-bold text-sm text-slate-700">管理者</span>
+              </Link>
             </nav>
           </div>
         </div>

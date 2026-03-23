@@ -85,12 +85,14 @@ export default function Navigation() {
                 企業の方へ
               </Link>
 
-              <Link
-                href="/admin"
-                className="whitespace-nowrap text-xs font-medium text-slate-900 hover:text-indigo-500 sm:text-sm"
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSeydM9loPApAfQ2Bw65KqvXeORLurYDNG2zWuAGioDwTKtoyA/viewform?usp=publish-editor"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="whitespace-nowrap rounded-md bg-orange-400 px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-orange-500 sm:text-sm"
               >
-                管理者
-              </Link>
+                見学希望
+              </a>
 
             </div>
 
@@ -163,9 +165,15 @@ export default function Navigation() {
                 企業の方へ
               </Link>
 
-              <Link href="/admin" onClick={closeMenu} className="text-sm font-medium text-slate-900 hover:text-indigo-500">
-                管理者
-              </Link>
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSeydM9loPApAfQ2Bw65KqvXeORLurYDNG2zWuAGioDwTKtoyA/viewform?usp=publish-editor"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenu}
+                className="rounded-md bg-orange-400 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-orange-500"
+              >
+                見学希望
+              </a>
 
             </nav>
           </aside>
