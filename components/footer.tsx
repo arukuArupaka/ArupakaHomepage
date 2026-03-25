@@ -111,7 +111,7 @@ export default function Footer() {
 
   <div className="flex items-center">
     <a 
-      href="https://www.instagram.com/hashiru_arupaka" 
+      href="https://www.instagram.com/hashiru_arupaka/" 
       target="_blank" 
       rel="noopener noreferrer"
       className="group relative flex items-center justify-center text-slate-300 transition-colors"
