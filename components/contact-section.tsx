@@ -7,7 +7,7 @@ export default function ContactSection() {
     const { ref, isVisible } = useFadeUp();
 
     return (
-       <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-white/50 backdrop-blur-sm">
+       <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 to-slate-800">
             <div className="max-w-3xl mx-auto">
                 <div
                     ref={ref}
@@ -15,10 +15,10 @@ export default function ContactSection() {
                         }`}
                 >
                     <div id="contact" className="text-center space-y-4">
-  <h2 className="text-3xl lg:text-4xl font-bold text-slate-900">
+  <h2 className="text-3xl lg:text-4xl font-bold text-white">
     お問い合わせ
   </h2>
-  <p className="text-slate-600 max-w-2xl mx-auto">
+  <p className="text-slate-300 max-w-2xl mx-auto">
     プロジェクトについてのご質問やご相談など、お気軽にお問い合わせください。
   </p>
 </div>
