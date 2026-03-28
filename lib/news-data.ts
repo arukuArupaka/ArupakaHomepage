@@ -6,12 +6,6 @@ export type NewsItem = {
 
 export const newsData: NewsItem[] = [
   {
-    date: "2025.03.14",
-    title: "Tech Conference 2025に参加しました",
-    description:
-      "最新のアプリ開発トレンドについて学び、業界トップの開発者と交流しました。",
-  },
-  {
     date: "2025.05.30",
     title: "2025年度新入生歓迎会を開催しました",
     description:
@@ -19,7 +13,7 @@ export const newsData: NewsItem[] = [
   },
   {
     date: "2025.07.28 - 2025.07.29",
-    title: "夏合宿で三重に行きました",
+    title: "夏合宿で三重に行きました🎐",
     description:
       "三重での夏合宿を実施し、開発や交流を通じてメンバー同士の親睦を深めました。",
   },
@@ -55,7 +49,7 @@ export const newsData: NewsItem[] = [
   },
   {
     date: "2026.02.01",
-    title: "春合宿 in 金沢を実施しました 🌸",
+    title: "春合宿 in 金沢 🌸",
     description:
       "金沢で春合宿を行い、開発と観光を通じてチームの結束を高めました。",
   },
