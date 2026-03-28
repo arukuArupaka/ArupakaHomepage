@@ -34,8 +34,15 @@ export default function NewsSection() {
   const pageNumbers = Array.from({ length: totalPages }, (_, index) => index);
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white/50 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto">
+    <section className="relative isolate overflow-hidden py-20 px-4 sm:px-6 lg:px-8 bg-[#3399ff]">
+      <div className="news-ripple-background" aria-hidden="true">
+        <div className="news-ripple-circle news-ripple-xxlarge news-ripple-shade1" />
+        <div className="news-ripple-circle news-ripple-xlarge news-ripple-shade2" />
+        <div className="news-ripple-circle news-ripple-large news-ripple-shade3" />
+        <div className="news-ripple-circle news-ripple-medium news-ripple-shade4" />
+        <div className="news-ripple-circle news-ripple-small news-ripple-shade5" />
+      </div>
+      <div className="relative z-10 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(360px,460px)] gap-10 lg:gap-16 items-center">
           <div
             ref={contentRef}
@@ -47,7 +54,7 @@ export default function NewsSection() {
           >
             <h2
               ref={titleRef}
-              className={`text-4xl font-bold text-slate-900 transition-all duration-1000 transform ${
+              className={`text-4xl font-bold text-white transition-all duration-1000 transform ${
                 titleVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-10"
@@ -76,7 +83,7 @@ export default function NewsSection() {
                 </article>
               ))}
             </div>
-            <div className="flex flex-wrap items-center gap-2 text-slate-900">
+            <div className="flex flex-wrap items-center gap-2 text-white">
               <button
                 type="button"
                 onClick={() => setPage((current) => Math.max(current - 1, 0))}
