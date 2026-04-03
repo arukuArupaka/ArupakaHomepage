@@ -135,6 +135,13 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family:
+      "Hiragino Sans",
+      "Hiragino Kaku Gothic ProN",
+      "Yu Gothic",
+      "YuGothic",
+      "Meiryo",
+      sans-serif;
   }
 }
 
