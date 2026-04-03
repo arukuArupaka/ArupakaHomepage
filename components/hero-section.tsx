@@ -35,6 +35,8 @@ const ITEMS: ItemDef[] = [
 
 const TYPE_WORDS = ["はしるアルパカ", "Learn Together.", "Build Apps."];
 const TYPE_COLORS = ["#777777", "#FFB868", "#68C0FF"];
+const HERO_FONT_STACK =
+  '"Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "YuGothic", "Meiryo", sans-serif';
 
 function FloatingItem({
   item,
@@ -185,8 +187,9 @@ export default function HeroSection() {
           <div className="-mt-[5vh] flex flex-col items-center">
             <h1 className="translate-x-[0.18em] whitespace-nowrap font-black leading-[0.9] tracking-tight">
               <span
-                className="whitespace-nowrap font-mono text-[clamp(1.9rem,6.95vw,6.45rem)]"
+                className="whitespace-nowrap text-[clamp(1.9rem,6.95vw,6.45rem)] font-black"
                 style={{
+                  fontFamily: HERO_FONT_STACK,
                   color: TYPE_COLORS[typedColorIndex],
                   textShadow:
                     typedColorIndex === 0
@@ -199,9 +202,10 @@ export default function HeroSection() {
                 {typedText}
               </span>
               <span
-                className={`ml-1 inline-block whitespace-nowrap font-mono text-[clamp(1.9rem,6.95vw,6.45rem)] text-slate-700 ${
+                className={`ml-1 inline-block whitespace-nowrap text-[clamp(1.9rem,6.95vw,6.45rem)] font-black text-slate-700 ${
                   showUnderscore ? "opacity-100" : "opacity-0"
                 }`}
+                style={{ fontFamily: HERO_FONT_STACK }}
               >
                 _
               </span>
