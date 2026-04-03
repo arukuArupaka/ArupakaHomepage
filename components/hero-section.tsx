@@ -214,7 +214,7 @@ export default function HeroSection() {
           </div>
         </div>
 
-        <motion.div style={{ y: logoY, scale: logoScale }} className="relative z-10 mx-auto mt-2 w-full max-w-5xl sm:mt-3">
+        <motion.div style={{ y: logoY, scale: logoScale }} className="relative z-10 mx-auto -mt-7 w-full max-w-5xl sm:-mt-6">
           <ReleaseBox />
         </motion.div>
       </section>
