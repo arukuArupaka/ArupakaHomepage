@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
+import ReleaseBox from "@/components/release-box";
 
 type ItemDef = {
   id: string;
@@ -31,21 +32,6 @@ const ITEMS: ItemDef[] = [
   { id: "javascript", src: "/images/javascript.svg", alt: "JavaScript", right: "10%", top: "40%", mobileRight: "13%", mobileTop: "43%", exitX: 200, exitY: -90, rotate: -9, size: 108, mobileSize: 84 },
   { id: "git", src: "/images/git.svg", alt: "Git", left: "40%", top: "87%", mobileLeft: "50%", mobileTop: "90%", exitX: -200, exitY: 320, rotate: -6, size: 120, mobileSize: 92 },
 ];
-
-const TAB_ORDER: Record<string, number> = {
-  c: 0,
-  python: 1,
-  react: 2,
-  next: 3,
-  typescript: 4,
-  javascript: 5,
-  figma: 6,
-  git: 7,
-};
-
-const TAB_ITEMS = [...ITEMS].sort(
-  (a, b) => (TAB_ORDER[a.id] ?? Number.MAX_SAFE_INTEGER) - (TAB_ORDER[b.id] ?? Number.MAX_SAFE_INTEGER),
-);
 
 const TYPE_WORDS = ["はしるアルパカ", "Learn Together.", "Build Apps."];
 const TYPE_COLORS = ["#777777", "#FFB868", "#68C0FF"];
@@ -164,7 +150,7 @@ export default function HeroSection() {
 
   return (
     <div ref={sectionRef}>
-      <section className="relative flex h-screen flex-col items-center justify-center overflow-hidden px-6">
+      <section className="relative overflow-hidden px-6 pt-24 pb-28 sm:pt-28 sm:pb-32">
         <div className="area absolute inset-0 z-0">
           <ul className="circles">
             <li />
@@ -195,61 +181,41 @@ export default function HeroSection() {
           })}
         </div>
 
-        <div className="relative z-10 -mt-[5vh] flex flex-col items-center text-center">
-          <h1 className="translate-x-[0.18em] whitespace-nowrap font-black leading-[0.9] tracking-tight">
-            <span
-              className="whitespace-nowrap font-mono text-[clamp(1.9rem,6.95vw,6.45rem)]"
-              style={{
-                color: TYPE_COLORS[typedColorIndex],
-                textShadow:
-                  typedColorIndex === 0
-                    ? "0 2px 10px rgba(119,119,119,0.38), 0 0 20px rgba(119,119,119,0.24)"
-                    : typedColorIndex === 1
-                      ? "0 2px 10px rgba(255,184,104,0.52), 0 0 20px rgba(255,184,104,0.3)"
-                      : "0 2px 10px rgba(104,192,255,0.55), 0 0 22px rgba(104,192,255,0.34)",
-              }}
-            >
-              {typedText}
-            </span>
-            <span
-              className={`ml-1 inline-block whitespace-nowrap font-mono text-[clamp(1.9rem,6.95vw,6.45rem)] text-slate-700 ${
-                showUnderscore ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              _
-            </span>
-          </h1>
-          <p className="mt-8 max-w-md text-base leading-relaxed text-gray-400 md:text-lg">
-            つくりたいを、カタチに。
-            <br />
-            ここは、学生がアプリをつくる場所。
-          </p>
-        </div>
-      </section>
-
-      <section className="relative px-6 pb-28">
-        <motion.div style={{ y: logoY, scale: logoScale }} className="relative z-10 mx-auto -mt-72 w-full max-w-5xl">
-          <div className="rounded-2xl border border-slate-200/80 bg-white/90 p-8 shadow-[0_22px_55px_rgba(15,23,42,0.12)] backdrop-blur-sm">
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-8 lg:gap-5">
-              {TAB_ITEMS.map((item) => (
-                <div
-                  key={`grid-${item.id}`}
-                  className="group flex min-w-0 flex-col items-center justify-center gap-2 rounded-xl border border-slate-200/80 bg-white/95 p-3 shadow-[0_8px_22px_rgba(15,23,42,0.07)] transition-all duration-200 hover:border-slate-300 hover:bg-slate-50"
-                >
-                  <Image
-                    src={item.src}
-                    alt={item.alt}
-                    width={44}
-                    height={44}
-                    className="transition-transform duration-200 group-hover:scale-125"
-                  />
-                  <span className="text-xs font-medium text-slate-700 transition-colors duration-200 group-hover:text-slate-900">
-                    {item.alt}
-                  </span>
-                </div>
-              ))}
-            </div>
+        <div className="relative z-10 flex min-h-[58vh] flex-col items-center justify-center text-center sm:min-h-[60vh]">
+          <div className="-mt-[5vh] flex flex-col items-center">
+            <h1 className="translate-x-[0.18em] whitespace-nowrap font-black leading-[0.9] tracking-tight">
+              <span
+                className="whitespace-nowrap font-mono text-[clamp(1.9rem,6.95vw,6.45rem)]"
+                style={{
+                  color: TYPE_COLORS[typedColorIndex],
+                  textShadow:
+                    typedColorIndex === 0
+                      ? "0 2px 10px rgba(119,119,119,0.38), 0 0 20px rgba(119,119,119,0.24)"
+                      : typedColorIndex === 1
+                        ? "0 2px 10px rgba(255,184,104,0.52), 0 0 20px rgba(255,184,104,0.3)"
+                        : "0 2px 10px rgba(104,192,255,0.55), 0 0 22px rgba(104,192,255,0.34)",
+                }}
+              >
+                {typedText}
+              </span>
+              <span
+                className={`ml-1 inline-block whitespace-nowrap font-mono text-[clamp(1.9rem,6.95vw,6.45rem)] text-slate-700 ${
+                  showUnderscore ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                _
+              </span>
+            </h1>
+            <p className="mt-8 max-w-md text-base leading-relaxed text-gray-400 md:text-lg">
+              つくりたいを、カタチに。
+              <br />
+              ここは、学生がアプリをつくる場所。
+            </p>
           </div>
+        </div>
+
+        <motion.div style={{ y: logoY, scale: logoScale }} className="relative z-10 mx-auto mt-2 w-full max-w-5xl sm:mt-3">
+          <ReleaseBox />
         </motion.div>
       </section>
       <style jsx>{`
@@ -271,95 +237,131 @@ export default function HeroSection() {
           height: 20px;
           background: rgba(148, 163, 184, 0.18);
           animation: float-square 25s linear infinite;
-          bottom: -150px;
+          bottom: -180px;
+          border-radius: 10px;
+          opacity: 0;
         }
 
         .circles li:nth-child(1) {
-          left: 25%;
+          left: 18%;
+          top: 24%;
+          bottom: auto;
           width: 80px;
           height: 80px;
           animation-delay: 0s;
+          opacity: 0.75;
         }
 
         .circles li:nth-child(2) {
-          left: 10%;
-          width: 20px;
-          height: 20px;
-          animation-delay: 2s;
-          animation-duration: 12s;
+          left: 8%;
+          top: 32%;
+          bottom: auto;
+          width: 26px;
+          height: 26px;
+          animation-delay: 1s;
+          animation-duration: 14s;
+          opacity: 0.62;
         }
 
         .circles li:nth-child(3) {
-          left: 70%;
+          left: 74%;
+          top: 26%;
+          bottom: auto;
           width: 20px;
           height: 20px;
           animation-delay: 4s;
+          opacity: 0.65;
         }
 
         .circles li:nth-child(4) {
-          left: 40%;
+          left: 30%;
+          top: 46%;
+          bottom: auto;
           width: 60px;
           height: 60px;
-          animation-delay: 0s;
-          animation-duration: 18s;
+          animation-delay: 3s;
+          animation-duration: 19s;
+          opacity: 0.5;
         }
 
         .circles li:nth-child(5) {
-          left: 65%;
-          width: 20px;
-          height: 20px;
-          animation-delay: 0s;
+          left: 56%;
+          top: 40%;
+          bottom: auto;
+          width: 24px;
+          height: 24px;
+          animation-delay: 6s;
+          animation-duration: 13s;
+          opacity: 0.55;
         }
 
         .circles li:nth-child(6) {
-          left: 75%;
-          width: 110px;
-          height: 110px;
-          animation-delay: 3s;
+          left: 82%;
+          top: 54%;
+          bottom: auto;
+          width: 90px;
+          height: 90px;
+          animation-delay: 8s;
+          animation-duration: 20s;
+          opacity: 0.42;
         }
 
         .circles li:nth-child(7) {
-          left: 35%;
-          width: 150px;
-          height: 150px;
-          animation-delay: 7s;
+          left: 14%;
+          width: 120px;
+          height: 120px;
+          animation-delay: 11s;
+          animation-duration: 24s;
         }
 
         .circles li:nth-child(8) {
-          left: 50%;
-          width: 25px;
-          height: 25px;
-          animation-delay: 15s;
-          animation-duration: 45s;
+          left: 46%;
+          top: 22%;
+          bottom: auto;
+          width: 28px;
+          height: 28px;
+          animation-delay: 5s;
+          animation-duration: 16s;
+          opacity: 0.58;
         }
 
         .circles li:nth-child(9) {
-          left: 20%;
-          width: 15px;
-          height: 15px;
-          animation-delay: 2s;
-          animation-duration: 35s;
+          left: 64%;
+          width: 18px;
+          height: 18px;
+          animation-delay: 9s;
+          animation-duration: 17s;
         }
 
         .circles li:nth-child(10) {
-          left: 85%;
-          width: 150px;
-          height: 150px;
-          animation-delay: 0s;
-          animation-duration: 11s;
+          left: 86%;
+          width: 132px;
+          height: 132px;
+          animation-delay: 13s;
+          animation-duration: 22s;
         }
 
         @keyframes float-square {
           0% {
-            transform: translateY(0) rotate(0deg);
-            opacity: 1;
-            border-radius: 0;
+            transform: translate3d(0, 0, 0) rotate(0deg);
+            opacity: 0;
+            border-radius: 10px;
+          }
+
+          12% {
+            opacity: 0.7;
+          }
+
+          60% {
+            transform: translate3d(28px, -420px, 0) rotate(180deg);
+            opacity: 0.45;
+            border-radius: 10px;
           }
 
           100% {
-            transform: translateY(-1000px) rotate(720deg);
+            transform: translate3d(-22px, -920px, 0) rotate(360deg);
             opacity: 0;
-            border-radius: 50%;
+            border-radius: 10px;
           }
         }
       `}</style>
